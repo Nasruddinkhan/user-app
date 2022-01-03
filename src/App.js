@@ -6,15 +6,17 @@ import React, { useState } from "react";
 const App = () => {
   const [userList, setUserList] = useState([]);
   const addUserHandler = (uName, uAge) => {
-    setUserList((prevUserList)=>{
-        return [...prevUserList, {name: uName, age : uAge}];
+    setUserList((prevUserList) => {
+      return [...prevUserList, { name: uName, age: uAge }];
     });
   };
   return (
-    <div className="App">
+    // <div className="App">
+    <React.Fragment>
       <AddUser onAddUser={addUserHandler} />
       <UserList users={userList} />
-    </div>
+    </React.Fragment>
+    // </div>
   );
 };
 
