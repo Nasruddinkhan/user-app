@@ -52,7 +52,7 @@ const AddUser = (props) => {
           onCloseErrorModal={closeErrorModelHandler}
         />
       )}
-      <Card cssClassName={classes.input}>
+      <Card className={classes.input}>
         <form onSubmit={addUserHandler}>
           <label htmlFor="username">User Name</label>
           <input
