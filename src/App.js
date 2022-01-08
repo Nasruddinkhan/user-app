@@ -1,21 +1,43 @@
-import logo from "./logo.svg";
-import "./App.css";
-import AddUser from "./component/AddUser";
-import UserList from "./component/UserList";
 import React, { useState } from "react";
-const App = () => {
-  const [userList, setUserList] = useState([]);
-  const addUserHandler = (uName, uAge) => {
-    setUserList((prevUserList)=>{
-        return [...prevUserList, {name: uName, age : uAge}];
-    });
+
+import "./App.css";
+import MoviesList from "./component/Movies/MoviesList ";
+
+function App() {
+  const [moviesList, setMoviesList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const fetchMoviesHandler = () => {
+    setIsLoading(true);
+    fetch("https://swapi.dev/api/films")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        const transformedMovies = data.results.map((item) => {
+          return {
+            id: item.episode_id,
+            title: item.title,
+            openingText: item.opening_crawl,
+            releaseDate: item.release_date,
+          };
+        });
+        setMoviesList(transformedMovies);
+        setIsLoading(false);
+      });
   };
+
   return (
-    <div className="App">
-      <AddUser onAddUser={addUserHandler} />
-      <UserList users={userList} />
-    </div>
+    <React.Fragment>
+      <section>
+        <button onClick={fetchMoviesHandler}>Fetch Movies</button>
+      </section>
+      <section>
+        {isLoading && <p>data is loading</p>}
+        {!isLoading && moviesList.length === 0 && <p>Found no movies.</p>}
+        {!isLoading && <MoviesList movies={moviesList} />}
+      </section>
+    </React.Fragment>
   );
-};
+}
 
 export default App;
