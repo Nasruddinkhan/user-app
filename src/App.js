@@ -8,6 +8,7 @@ import BackwordCounter from "./component/BackwordCounter";
 import Tasks from "./component/Tasks/Tasks";
 import NewTask from "./component/TaskForm/NewTask";
 import useHttp from "./hook/use-http";
+import SimpleInput from "./component/formValidation/SimpleInput";
 
 const App = () => {
   const { isLoading, error, sendRequest: fetchTasks } = useHttp();
@@ -42,37 +43,9 @@ const App = () => {
     setTasks((prevTasks) => prevTasks.concat(task));
   };
 
-
-  // const fetchTasks = async (taskText) => {
-  //   setIsLoading(true);
-  //   setError(null);
-  //   try {
-  //     const response = await fetch(
-  //       "https://react-http-af29c-default-rtdb.firebaseio.com/tasks.json"
-  //     );
-  //     setIsLoading(true);
-  //     setError(null);
-  //     if (!response.ok) {
-  //       throw new Error("Request failed!");
-  //     }
-
-  //     const data = await response.json();
-
-  //     const loadedTasks = [];
-
-  //     for (const taskKey in data) {
-  //       loadedTasks.push({ id: taskKey, text: data[taskKey].text });
-  //     }
-
-  //     setTasks(loadedTasks);
-  //   } catch (err) {
-  //     setError(err.message || "Something went wrong!");
-  //   }
-  //   setIsLoading(false);
-  // };
-
   return (
     <div className="App">
+      <SimpleInput/>
       <NewTask addTask={addItemHandler} />
       <Tasks
         items={tasks}
