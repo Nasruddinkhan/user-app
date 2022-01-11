@@ -12,7 +12,20 @@ const SimpleInput = () => {
   }, [enterNameIsValid]);
   const nameInputChangeHandler = (event) => {
     setEnterName(event.target.value);
+     if (event.target.value.trim() !== "") {
+       setEnterNameIsValid(true);
+     }
   };
+
+    const nameInputBlurHandler = (event) => {
+      setEnterName(event.target.value);
+      setEnteredNameTouched(true);
+      if (enterName.trim() === '') {
+          setEnterNameIsValid(false)
+          return
+      }
+    };
+ 
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
@@ -26,11 +39,11 @@ const SimpleInput = () => {
     console.log(enterValue);
     setEnterName("");
   };
-    const nameInputIsInvalid = !enterNameIsValid && enteredNameTouched;
+  const nameInputIsInvalid = !enterNameIsValid && enteredNameTouched;
 
-    const nameInputClasses = nameInputIsInvalid
-      ? "form-control invalid"
-      : "form-control";
+  const nameInputClasses = nameInputIsInvalid
+    ? "form-control invalid"
+    : "form-control";
 
   return (
     <Card cssClassName={classes.simpleform}>
@@ -43,6 +56,7 @@ const SimpleInput = () => {
             value={enterName}
             onChange={nameInputChangeHandler}
             id="name"
+            onBlur={nameInputBlurHandler}
           />
           {nameInputIsInvalid && (
             <p className="error-text"> Enter the name cannot be empty!</p>
