@@ -4,7 +4,7 @@ import UserList from "./component/UserList";
 import React, { useEffect, useState } from "react";
 import ForwordCounter from "./component/ForwordCounter";
 import BackwordCounter from "./component/BackwordCounter";
-
+import BasicForm from './component/formValidation/BasicForm'
 import Tasks from "./component/Tasks/Tasks";
 import NewTask from "./component/TaskForm/NewTask";
 import useHttp from "./hook/use-http";
@@ -45,6 +45,7 @@ const App = () => {
 
   return (
     <div className="App">
+      <BasicForm/>
       <SimpleInput/>
       <NewTask addTask={addItemHandler} />
       <Tasks
