@@ -1,5 +1,7 @@
 import classes from "./Counter.module.css";
 import { useSelector, useDispatch } from "react-redux";
+import { Component } from "react";
+
 const Counter = () => {
   const counter = useSelector((state) => state.counter);
   const dispatch = useDispatch();
@@ -23,5 +25,4 @@ const Counter = () => {
     </main>
   );
 };
-
 export default Counter;
