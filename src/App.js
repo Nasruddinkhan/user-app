@@ -5,7 +5,7 @@ import Auth from "./components/Auth";
 import { useSelector } from 'react-redux';
 
 
-function App() {
+const App = ()=> {
    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   return (
     <Fragment>
