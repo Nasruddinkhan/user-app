@@ -6,10 +6,12 @@ import CartItem from "./CartItem";
 const Cart = (props) => {
   const items = useSelector((state) => state.cart.items);
 
+
   const cartItem = (
     <ul>
-      {items.map((item) => (
+      {items.map((item, idx) => (
         <CartItem
+          key={idx}
           item={{
             title: item.name,
             quantity: item.quantity,
