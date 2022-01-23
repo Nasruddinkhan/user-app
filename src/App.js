@@ -1,19 +1,19 @@
-import logo from "./logo.svg";
-import "./App.css";
-import AddUser from "./component/AddUser";
-import UserList from "./component/UserList";
-import React, { useState } from "react";
+import { Route, Routes } from "react-router-dom";
+import Products from "./pages/Products";
+import Welcome from "./pages/Welcome";
+import MainHeader from "./components/MainHeader";
+import ProductDetail from "./pages/ProductDetail";
+
 const App = () => {
-  const [userList, setUserList] = useState([]);
-  const addUserHandler = (uName, uAge) => {
-    setUserList((prevUserList)=>{
-        return [...prevUserList, {name: uName, age : uAge}];
-    });
-  };
   return (
-    <div className="App">
-      <AddUser onAddUser={addUserHandler} />
-      <UserList users={userList} />
+    <div>
+      <MainHeader />
+      <Routes>
+        <Route path="/" element={<Welcome />} exact />
+        <Route path="/products" element={<Products />} exact />
+        <Route path="/welcome" element={<Welcome />} />
+        <Route path="/products/:productId" element={<ProductDetail />} />
+      </Routes>
     </div>
   );
 };
