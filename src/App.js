@@ -1,20 +1,22 @@
 import { Route, Routes } from "react-router-dom";
-import Products from "./pages/Products";
-import Welcome from "./pages/Welcome";
-import MainHeader from "./components/MainHeader";
-import ProductDetail from "./pages/ProductDetail";
+import Layout from "./components/layout/Layout ";
+
+import AllQuotes from "./pages/AllQuotes";
+import NewQuote from "./pages/NewQuote";
+import NotFound from "./pages/NotFound ";
+import QuoteDetail from "./pages/QuoteDetail";
 
 const App = () => {
   return (
-    <div>
-      <MainHeader />
+    <Layout>
       <Routes>
-        <Route path="/" element={<Welcome />} exact />
-        <Route path="/products" element={<Products />} exact />
-        <Route path="/welcome" element={<Welcome />} />
-        <Route path="/products/:productId" element={<ProductDetail />} />
+        <Route path="/" element={<AllQuotes />} exact />
+        <Route path="/quotes" element={<AllQuotes />} exact />
+        <Route path="/quotes/:quoteId" element={<QuoteDetail />} exact />
+        <Route path="/new-quote" element={<NewQuote />} exact />
+        <Route path="*" element={<NotFound/>} exact />
       </Routes>
-    </div>
+    </Layout>
   );
 };
 
