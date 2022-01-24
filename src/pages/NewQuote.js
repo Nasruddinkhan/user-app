@@ -1,10 +1,13 @@
 import QuoteForm from "../components/quotes/QuoteForm";
+import { useNavigate } from "react-router-dom";
 
 const NewQuote = () => {
-  const addQuoteHandler = (quoteData) =>{
+  const navigate = useNavigate();
+
+  const addQuoteHandler = (quoteData) => {
     console.table(quoteData);
-    use
-  }
+    navigate("/quotes");
+  };
   return <QuoteForm onAddQuote={addQuoteHandler} />;
 };
 
