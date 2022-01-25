@@ -7,14 +7,13 @@ const NewQuote = () => {
   const { sendRequest, status } = useHttp(addQuote);
   const navigate = useNavigate();
   useEffect(() => {
-    console.log(status);
     if (status === "completed") {
       navigate("/quotes");
     }
   }, [status, navigate]);
   const addQuoteHandler = (quoteData) => {
     sendRequest(quoteData);
-    navigate("/quotes");
+   
   };
   return <QuoteForm onAddQuote={addQuoteHandler} />;
 };

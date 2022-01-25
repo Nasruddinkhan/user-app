@@ -13,7 +13,6 @@ const AllQuotes = () => {
     error,
   } = useHttp(getAllQuotes, true);
   useEffect(() => {
-    console.log(123);
     sendRequest();
   }, [sendRequest]);
 
