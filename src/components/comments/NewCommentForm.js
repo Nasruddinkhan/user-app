@@ -7,7 +7,7 @@ const NewCommentForm = (props) => {
 
   const submitFormHandler = (event) => {
     event.preventDefault();
-
+    
     // optional: Could validate here
 
     // send comment to server

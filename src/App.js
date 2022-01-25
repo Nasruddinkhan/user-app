@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Layout from "./components/layout/Layout ";
 
 import AllQuotes from "./pages/AllQuotes";
@@ -10,11 +10,12 @@ const App = () => {
   return (
     <Layout>
       <Routes>
-        <Route path="/" element={<AllQuotes />} exact />
-        <Route path="/quotes" element={<AllQuotes />} exact />
-        <Route path="/quotes/:quoteId" element={<QuoteDetail />} exact />
-        <Route path="/new-quote" element={<NewQuote />} exact />
-        <Route path="*" element={<NotFound/>} exact />
+        <Route exact path="/" element={ <Navigate to= "/quotes" />} />
+        <Route exact path="/quotes" element={<AllQuotes />} />
+        <Route path="/quotes/:quoteId/*" element={<QuoteDetail />} />
+        
+        <Route path="/new-quote" element={<NewQuote />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Layout>
   );
