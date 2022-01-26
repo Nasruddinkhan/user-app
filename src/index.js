@@ -1,16 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { BrowserRouter } from "react-router-dom";
+import { AuthContextProvider } from "./hooks/auth-context";
 
 ReactDOM.render(
-  <BrowserRouter>
- 
-    <App />
-  </BrowserRouter>,
-
+  <AuthContextProvider>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </AuthContextProvider>,
   document.getElementById("root")
 );
 
