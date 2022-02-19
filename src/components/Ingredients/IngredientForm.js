@@ -2,17 +2,18 @@ import React, { useState } from "react";
 
 import Card from "../UI/Card";
 import "./IngredientForm.css";
+const initialObject = {
+  title: "",
+  amount: "",
+};
 
 const IngredientForm = React.memo((props) => {
-  const [inputState, setInputState] = useState({
-    title: "",
-    amount: "",
-  });
+  const [inputState, setInputState] = useState(initialObject);
   const submitHandler = (event) => {
     event.preventDefault();
     console.table(inputState);
     props.addIngredients(inputState);
-    // ...
+    setInputState(initialObject);
   };
 
   return (
@@ -35,7 +36,7 @@ const IngredientForm = React.memo((props) => {
             />
           </div>
           <div className="form-control">
-            <label htmlFor="amount">Amount</label>  
+            <label htmlFor="amount">Amount</label>
             <input
               type="number"
               id="amount"
