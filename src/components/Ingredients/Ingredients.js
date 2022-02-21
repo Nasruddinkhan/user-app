@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useEffect } from "react";
 
 import IngredientForm from "./IngredientForm";
@@ -9,7 +9,10 @@ const URL =
   "https://my-second-project-50046-default-rtdb.firebaseio.com/ingredients.json";
 function Ingredients() {
   const [userIngredients, setUserIngredients] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
   const addIngredientsHandler = async (ingredients) => {
+    setIsLoading(true);
     await fetch(URL, {
       method: "POST",
       headers: {
@@ -17,7 +20,10 @@ function Ingredients() {
       },
       body: JSON.stringify(ingredients),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        setIsLoading(false);
+        return response.json();
+      })
       .then((responseData) => {
         setUserIngredients((prevIngredients) => [
           ...prevIngredients,
@@ -26,11 +32,20 @@ function Ingredients() {
       });
   };
   const onRemoveItemHandler = (ingredientId) => {
-    setUserIngredients((prevIngredients) =>
-      prevIngredients.filter((ingredient) => ingredient.id !== ingredientId)
-    );
+    fetch(
+      `https://my-second-project-50046-default-rtdb.firebaseio.com/ingredients/${ingredientId}.json`,
+      {
+        method: "DELETE",
+      }
+    ).then((response) => {
+      setUserIngredients((prevIngredients) =>
+        prevIngredients.filter((ingredient) => ingredient.id !== ingredientId)
+      );
+    });
   };
-
+  useEffect(() => {
+    console.log("RENDERING INGREDIENTS", userIngredients);
+  }, [userIngredients]);
   useEffect(() => {
     fetch(URL)
       .then((response) => response.json())
@@ -46,13 +61,15 @@ function Ingredients() {
         setUserIngredients(loadedIngredients);
       });
   }, []);
-
+  const filteredIngredientsHandler = useCallback((filteredIngredients) => {
+    setUserIngredients(filteredIngredients);
+  }, []);
   return (
     <div className="App">
-      <IngredientForm addIngredients={addIngredientsHandler} />
+      <IngredientForm addIngredients={addIngredientsHandler} loading={isLoading} />
 
       <section>
-        <Search />
+        <Search onLoadIngredients={filteredIngredientsHandler} />
         {/* Need to add list here! */}
         <IngredientList
           ingredients={userIngredients}
