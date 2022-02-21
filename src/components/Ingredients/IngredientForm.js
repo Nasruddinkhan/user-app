@@ -13,7 +13,7 @@ const IngredientForm = React.memo((props) => {
   const submitHandler = (event) => {
     event.preventDefault();
     console.table(inputState);
-    props.addIngredients(inputState);
+    props.onAddIngredient(inputState);
     setInputState(initialObject);
   };
 
