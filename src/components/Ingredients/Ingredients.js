@@ -47,9 +47,9 @@ function Ingredients() {
   // const [isLoading, setIsLoading] = useState(false);
   // const [error, setError] = useState();
 
-  const addIngredientsHandler = async (ingredients) => {
+  const addIngredientsHandler =  useCallback(ingredients => {
     dispatchHttp({ type: "SEND" });
-    await fetch(URL, {
+     fetch(URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -69,7 +69,7 @@ function Ingredients() {
       .catch((error) => {
         dispatchHttp({ type: "ERROR", errorMessage: "Something went wrong!" });
       });
-  };
+  },[]);
 
   const onRemoveItemHandler = (ingredientId) => {
     dispatchHttp({ type: "SEND" });

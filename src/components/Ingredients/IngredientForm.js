@@ -9,7 +9,11 @@ const initialObject = {
 };
 
 const IngredientForm = React.memo((props) => {
+  
   const [inputState, setInputState] = useState(initialObject);
+
+  console.log('RENDRING INGREDIENT FORM');
+
   const submitHandler = (event) => {
     event.preventDefault();
     console.table(inputState);
